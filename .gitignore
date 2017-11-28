@@ -1,0 +1,5 @@
+DATA/PAK/axel_12.pak.xen
+DATA/SONGS/test_song.pak.xen
+PLUGINS/CODE/core/Debug/core.tlog/*
+PLUGINS/CODE/noteLimit/Debug/noteLimitfix.tlog/*
+*.lastbuildstate
