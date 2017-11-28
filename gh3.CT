@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="21">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Score"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>gh3.exe+612B00</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"Streak"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gh3.exe+612AE8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Health"</Description>
+      <VariableType>Float</VariableType>
+      <Address>gh3.exe+612AF0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Starpower"</Description>
+      <VariableType>Float</VariableType>
+      <Address>gh3.exe+612AF8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"Health Intensity"</Description>
+      <VariableType>Float</VariableType>
+      <Address>0x00A13128</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Maximum Health"</Description>
+      <VariableType>Float</VariableType>
+      <Address>0x00A13130</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"No Fail (viewer mode)"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0x00A1312C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"+pts per note"</Description>
+      <VariableType>Float</VariableType>
+      <Address>gh3.exe+612B78</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"+pts per beat"</Description>
+      <VariableType>Float</VariableType>
+      <Address>gh3.exe+612B70</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Song Speed"</Description>
+      <VariableType>Float</VariableType>
+      <Address>0x00A12C44</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Time (seconds)"</Description>
+      <VariableType>Float</VariableType>
+      <Address>0x00A12C50</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"Script Assembly"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0x00B54538</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"No description"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0x00A12FD0</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
