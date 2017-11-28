@@ -8,6 +8,7 @@ using System.Drawing;
 //using Ini;
 using IniParser;
 using IniParser.Model;
+using Discord;
 
 namespace FastGH3
 {
@@ -20,6 +21,7 @@ namespace FastGH3
         private static int maxarraysize;
         private static FileIniDataParser chartini;
         private static IniData data;
+        public IDiscordClient discordClient;
 
         static void disallowGameStartup()
         {
@@ -184,6 +186,10 @@ namespace FastGH3
                         //Application.Run(new settings());
                         settings options = new settings();
                         options.ShowDialog();
+                    }
+                    if (parameters[1] == "discord")
+                    {
+                        
                     }
                     if (File.Exists(parameters[1]))
                     {
