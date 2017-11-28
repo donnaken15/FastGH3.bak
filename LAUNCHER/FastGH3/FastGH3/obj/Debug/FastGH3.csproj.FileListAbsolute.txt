@@ -1,0 +1,8 @@
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\bin\Debug\FastGH3.exe.config
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\bin\Debug\FastGH3.exe
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\bin\Debug\FastGH3.pdb
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\bin\Debug\Nini.dll
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\bin\Debug\QueenBeeParser.dll
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\obj\Debug\FastGH3.exe
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\obj\Debug\FastGH3.pdb
+C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\obj\Debug\FastGH3.csprojResolveAssemblyReference.cache
