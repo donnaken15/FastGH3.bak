@@ -1,15 +1,13 @@
 ﻿using System.Windows.Forms;
 using System.IO;
 using System;
-using Ini;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace FastGH3
 {
     public partial class settings : Form
     {
-        public static IniFile dxwndini = new IniFile("C:\\Windows\\FastGH3\\WINDOWED\\dxwnd.ini");
+        public static IniFile dxwndini = new IniFile();
 
         void changeRes(string width, string height)
         {
@@ -22,10 +20,11 @@ namespace FastGH3
             {
 
             }
+            dxwndini.Load("C:\\Windows\\FastGH3\\WINDOWED\\dxwnd.ini");
             File.WriteAllText("C:\\Windows\\FastGH3\\CONFIGS\\resx",width);
             File.WriteAllText("C:\\Windows\\FastGH3\\CONFIGS\\resy", height);
-            dxwndini.IniWriteValue("target","sizx0",width);
-            dxwndini.IniWriteValue("target", "sizy0", height);
+            dxwndini.SetKeyValue("target","sizx0",width);
+            dxwndini.SetKeyValue("target", "sizy0", height);
             File.WriteAllText(Path.Combine(Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName,"Local\\Aspyr\\FastGH3\\AspyrConfig.xml"), "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<r>\n    <s id = \"Video.Width\">"+width+"</s>\n    <s id = \"Video.Height\">"+height+"</s>\n    <s id = \"Options.GraphicsQuality\">0</s>\n    <s id = \"Options.Crowd\">0</s>\n    <s id = \"Options.Physics\">0</s>\n    <s id = \"Options.Flares\">0</s>\n    <s id = \"Options.FrontRowCamera\">1</s>\n    <s id = \"AudioLagReminderShown\">1</s>\n    <s id = \"AutoLogin\">OFF</s>\n    <s id = \"Username\"></s>\n    <s id = \"MatchUsername\"></s>\n    <s id = \"Password\"></s>\n    <s id = \"6f1d2b61d5a011cfbfc7444553540000\">201 202 203 204 205 402 999 219 235 400 401 999 310</s>\n    <s id = \"Sound.SongSkew\">0</s>\n</r>");
             Process newdxwnd = new Process();
             newdxwnd.StartInfo.FileName = "C:\\Windows\\FastGH3\\WINDOWED\\dxwnd.exe";
@@ -39,7 +38,7 @@ namespace FastGH3
         {
             DialogResult = DialogResult.OK;
             InitializeComponent();
-            res.Text = dxwndini.IniReadValue("target", "sizx0") + "x" + dxwndini.IniReadValue("target","sizy0");
+            res.Text = dxwndini.GetKeyValue("target", "sizx0") + "x" + dxwndini.GetKeyValue("target","sizy0");
             if (File.Exists("C:\\Windows\\FastGH3\\CONFIGS\\difficulty"))
             {
                 diff.Text = File.ReadAllText("C:\\Windows\\FastGH3\\CONFIGS\\difficulty");

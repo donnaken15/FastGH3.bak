@@ -4,81 +4,96 @@
     <CheatEntry>
       <ID>4</ID>
       <Description>"Score"</Description>
+      <LastState Value="46950" RealAddress="00A12B00"/>
       <VariableType>2 Bytes</VariableType>
       <Address>gh3.exe+612B00</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>10</ID>
       <Description>"Streak"</Description>
+      <LastState Value="0" RealAddress="00A12AE8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>gh3.exe+612AE8</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>6</ID>
       <Description>"Health"</Description>
+      <LastState Value="0.3777940273" RealAddress="00A12AF0"/>
       <VariableType>Float</VariableType>
       <Address>gh3.exe+612AF0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>11</ID>
       <Description>"Starpower"</Description>
+      <LastState Value="0" RealAddress="00A12AF8"/>
       <VariableType>Float</VariableType>
       <Address>gh3.exe+612AF8</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>12</ID>
       <Description>"Health Intensity"</Description>
+      <LastState Value="0.8500000238" RealAddress="00A13128"/>
       <VariableType>Float</VariableType>
       <Address>0x00A13128</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>7</ID>
       <Description>"Maximum Health"</Description>
+      <LastState Value="2" RealAddress="00A13130"/>
       <VariableType>Float</VariableType>
       <Address>0x00A13130</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>8</ID>
       <Description>"No Fail (viewer mode)"</Description>
+      <LastState Value="0" RealAddress="00A1312C"/>
       <VariableType>4 Bytes</VariableType>
       <Address>0x00A1312C</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>1</ID>
       <Description>"+pts per note"</Description>
+      <LastState Value="50" RealAddress="00A12B78"/>
       <VariableType>Float</VariableType>
       <Address>gh3.exe+612B78</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>2</ID>
       <Description>"+pts per beat"</Description>
+      <LastState Value="25" RealAddress="00A12B70"/>
       <VariableType>Float</VariableType>
       <Address>gh3.exe+612B70</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>3</ID>
       <Description>"Song Speed"</Description>
+      <LastState Value="116" RealAddress="00A12C44"/>
       <VariableType>Float</VariableType>
       <Address>0x00A12C44</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>5</ID>
       <Description>"Time (seconds)"</Description>
+      <LastState Value="21.86108017" RealAddress="00A12C50"/>
       <VariableType>Float</VariableType>
       <Address>0x00A12C50</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>9</ID>
       <Description>"Script Assembly"</Description>
+      <LastState Value="1" RealAddress="00B54538"/>
       <VariableType>4 Bytes</VariableType>
       <Address>0x00B54538</Address>
     </CheatEntry>
-    <CheatEntry>
-      <ID>13</ID>
-      <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0x00A12FD0</Address>
-    </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols/>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>_playerbase</Name>
+      <Address>001B0000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>note_streak</Name>
+      <Address> 00430019</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
 </CheatTable>

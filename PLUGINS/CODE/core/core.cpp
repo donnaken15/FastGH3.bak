@@ -14,8 +14,8 @@ std::vector<HANDLE> g_loadedPlugins;
 void LoadPlugins()
 {
 	std::wofstream log;
-	log.open("log");
-	log << L"";
+	log.open("debug.txt");
+	log << L"Loading plugins...\n";
 	
 
 
@@ -41,7 +41,7 @@ void LoadPlugins()
 		FindClose(hFind);
 	}
 
-	log << L"OK";
+	log << L"All plugins loaded...\n";
 	log.close();
 }
 
@@ -60,11 +60,11 @@ HANDLE LoadPlugin(LPCWSTR plugin, std::wofstream &log)
     HANDLE pluginHandle = LoadLibraryW(dir.c_str());
     if (pluginHandle != INVALID_HANDLE_VALUE && pluginHandle != NULL)
     {
-        log << L"loaded " << dir.c_str() << " @ " << pluginHandle << L"\n";
+        log << L"Loaded " << dir.c_str() << " at " << pluginHandle << L"\n";
     }
     else
     {
-        log << L"failed " << dir.c_str() << L" | why: " << GetLastError() << L"\n";
+        log << L"Failed to load " << dir.c_str() << L". Error code given: " << GetLastError() << L"\n";
     }
     return pluginHandle;
     
