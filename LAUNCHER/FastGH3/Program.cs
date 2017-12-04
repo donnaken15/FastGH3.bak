@@ -191,8 +191,8 @@ namespace FastGH3
                     File.Copy("C:\\Windows\\fastgh3\\DATA\\SONGS\\.qb", "C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb", true);
                     File.SetAttributes("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", FileAttributes.Normal);
                     disallowGameStartup();
-                    PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\test_song.pak.xen", "", "", PakFormatType.PC);
-                    PakEditor buildsong = new PakEditor(pakformat);
+                    PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\song_song.pak.xen", "", "", PakFormatType.PC);
+                    PakEditor buildsong = new PakEditor(pakformat, false);
                     Console.WriteLine("Compiling chart.");
                     QbFile songdata = new QbFile("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", pakformat);
                     QbItemBase array_easy = new QbItemArray(songdata);
