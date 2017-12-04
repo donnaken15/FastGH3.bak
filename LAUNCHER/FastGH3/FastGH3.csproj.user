@@ -16,7 +16,7 @@
     <StartArguments>F:\Feedback 0.97b\Songs\custom songs\Hardest Dial-Up Ever\HeleneGH.chart</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <StartArguments>"F:\Feedback 0.97b\Songs\custom songs\hardest dial-up ever\HeleneGH.chart"</StartArguments>
+    <StartArguments>"F:\Feedback 0.97b\Songs\custom songs\hardest dial-up ever\HeleneGH.chart" //USELESS:bodysnatchers\.chart</StartArguments>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <StartAction>Project</StartAction>
   </PropertyGroup>

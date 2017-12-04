@@ -2,6 +2,8 @@
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Nanook.QueenBee.Parser;
+using static IniFile;
 
 namespace FastGH3
 {
@@ -9,6 +11,8 @@ namespace FastGH3
     {
         private static string currentchart;
         private static string chart;
+        private static int maxnotes;
+        private static int pushinteger;
         private static string[] parameters;
         private static OpenFileDialog openchart = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = "All chart types|*.mid;*.chart|Song.ini|Song.ini|Any type|*.*", RestoreDirectory = true, Title = "Select chart" };
 
@@ -99,7 +103,31 @@ namespace FastGH3
                     File.Copy("C:\\Windows\\fastgh3\\DATA\\SONGS\\.qb", "C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb", true);
                     File.SetAttributes("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", FileAttributes.Normal);
                     Console.WriteLine("Opening song pak.");
-                    
+                    disallowGameStartup();
+                    PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\test_song.pak.xen", "", "", PakFormatType.PC);
+                    PakEditor buildsong = new PakEditor(pakformat);
+                    Console.WriteLine("Compiling chart.");
+                    QbFile songdata = new QbFile("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", pakformat);
+                    QbItemBase array_easy = new QbItemArray(songdata);
+                    array_easy.Create(QbItemType.SectionArray);
+                    array_easy.ItemQbKey.Crc.Equals("BDA2A669");
+                    QbItemInteger notes_easy = new QbItemInteger(songdata);
+                    maxnotes = chartini.GetSection("EasySingle").Keys.Count;
+                    File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize",maxnotes.ToString());
+                    notes_easy.Create(QbItemType.ArrayInteger);
+                    notes_easy.Values[0] = 1;
+                    foreach (IniSection.IniKey k in chartini.GetSection("EasySingle").Keys)
+                    {
+                        Console.WriteLine(k.GetValue().Replace("N ","").EndsWith(" ") +" note @ " + k.GetName()+"");
+                    }
+                    Console.ReadKey();
+                    songdata.AddItem(array_easy);
+                    array_easy.AddItem(notes_easy);
+                    songdata.AlignPointers();
+                    songdata.Write("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
+                    Console.WriteLine("Compiling pak.");
+                    buildsong.ReplaceFile("6BE19E2F", "C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
+                    Console.WriteLine("Encoding song.");
                     disallowGameStartup();
                     Console.WriteLine("Speeding up.");
                     Console.ReadKey();
@@ -145,6 +173,7 @@ namespace FastGH3
                         Process.Start("mid2chart.exe", "-e " + parameters[1]);
                         currentchart = parameters[1].Replace(Path.GetFileName(parameters[1]), "") + Path.GetFileName(parameters[1]).Replace(".chart", " (editable) .chart");
                     }
+                    Console.WriteLine("Reading chart file.");
                     chart = File.ReadAllText(currentchart).Replace("}", "").Replace("{", "");
                     File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart", chart);
                     if (chart.Contains("= S "))
@@ -156,24 +185,45 @@ namespace FastGH3
                     chartini.Load("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart");
                     Console.WriteLine("Opening song pak.");
                     File.WriteAllText("C:\\Windows\\FastGH3\\PLUGINS\\CODE\\notelimit\\notelimitfix.cpp", "#include \"noteLimitFix.h\"\n#include \"core\\Patcher.h\"\n#include <stdint.h>\n\nconst uint32_t MAX_NOTES " + chartini.GetSection("ExpertSingle").Keys.Count  + ";//5DA666\nconst uint32_t GH3_MAX_PLAYERS = 2;\nvoid* const SIZEOP_NOTE_ALLOCATION = (void*)0x0041AA78;\nvoid* const ADDROP_SUSTAINARRAY_1 = (void*)0x0041EE33;\nvoid * const ADDROP_SUSTAINARRAY_2 = (void*)0x00423CD4;\nvoid * const ADDROP_SUSTAINARRAY_3 = (void*)0x00423D02;\nvoid * const ADDROP_FCARRAY = (void*)0x00423D14;\nvoid * const ADDROP_NOTEOFFSETARRAY = (void*)0x00423D22;\n\n\nstatic float* fixedSustainArray = nullptr;\nstatic float* fixedFcArray = nullptr;\nstatic uint32_t* fixedOffsetArray = nullptr;\n\n\nstatic GH3P::Patcher g_patcher = GH3P::Patcher(__FILE__);\n\n\nvoid FixNoteLimit()\n{\nif(fixedSustainArray == nullptr)\nfixedSustainArray = new float[MAX_NOTES * GH3_MAX_PLAYERS];\n\n\nif(fixedFcArray == nullptr)\nfixedFcArray = new float[MAX_NOTES * GH3_MAX_PLAYERS];\n\nif(fixedOffsetArray == nullptr)\nfixedOffsetArray = new uint32_t[MAX_NOTES * GH3_MAX_PLAYERS];\n\n\ng_patcher.WriteInt32(SIZEOP_NOTE_ALLOCATION, MAX_NOTES);\n\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_1, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_2, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_3, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_FCARRAY, reinterpret_cast<uint32_t>(fixedFcArray));\ng_patcher.WriteInt32(ADDROP_NOTEOFFSETARRAY, reinterpret_cast<uint32_t>(fixedOffsetArray));\n}\n\n");
-                    
                     disallowGameStartup();
-                    Process mp3 = new Process();
-                    mp3.StartInfo.FileName = "lame.exe";
-                    mp3.StartInfo.Arguments = "-b128 -s 44100 "+'"' + parameters[1].Replace(Path.GetFileName(parameters[1]), "") + chartini.GetSection("Song").GetKey("MusicStream").ToString().Replace("\"", "") + '"'+ " C:\\Windows\\FastGH3\\DATA\\MUSIC\\.mp3";
-                    mp3.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    mp3.Start();
-                    mp3.WaitForExit();
+                    Console.WriteLine("Generating QB template.");
+                    File.Delete("C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb");
+                    File.Copy("C:\\Windows\\fastgh3\\DATA\\SONGS\\.qb", "C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb", true);
+                    File.SetAttributes("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", FileAttributes.Normal);
                     disallowGameStartup();
-                    try
+                    PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\test_song.pak.xen", "", "", PakFormatType.PC);
+                    PakEditor buildsong = new PakEditor(pakformat);
+                    Console.WriteLine("Compiling chart.");
+                    QbFile songdata = new QbFile("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", pakformat);
+                    QbItemBase array_easy = new QbItemArray(songdata);
+                    array_easy.Create(QbItemType.SectionArray);
+                    QbItemInteger notes_expert = new QbItemInteger(songdata);
+                    maxnotes = 5162*3;
+                    File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize", maxnotes.ToString());
+                    notes_expert.Create(QbItemType.ArrayInteger);
+                    foreach (IniSection s in chartini.Sections)
                     {
-                        File.Copy("C:\\Windows\\FastGH3\\DATA\\MUSIC\\song.dat.xen", "C:\\Windows\\FastGH3\\DATA\\MUSIC\\song.dat.xen.bak");
+                        foreach (IniSection.IniKey k in s.Keys)
+                        {
+                            if (s.Name == "ExpertSingle")
+                            {
+                                Console.WriteLine("note @ "+k.GetName()+" that is "+k.GetValue().Substring(5)+" milliseconds long");
+                                notes_expert.Values[pushinteger] = Convert.ToUInt32(k.Name);
+                                notes_expert.Values[pushinteger + 1] = Convert.ToUInt32(k.Value.Substring(5));
+                                notes_expert.Values[pushinteger + 2] = 1;
+                                pushinteger += 3;
+                            }
+                        }
                     }
-                    catch
-                    {
-                        
-                    }
-
+                    Console.ReadKey();
+                    songdata.AddItem(array_easy);
+                    array_easy.AddItem(notes_expert);
+                    songdata.AlignPointers();
+                    songdata.Write("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
+                    Console.WriteLine("Compiling pak.");
+                    buildsong.ReplaceFile("6BE19E2F", "C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
+                    Console.WriteLine("Encoding song.");
+                    disallowGameStartup();
                     disallowGameStartup();
                     Console.WriteLine("Speeding up.");
                     Process dxwnd = new Process();

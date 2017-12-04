@@ -23,11 +23,7 @@ namespace Nanook.QueenBee.Parser
             this.Values = new uint[Convert.ToInt32(File.ReadAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize"))]; //sets item count
             _values[0] = 0;
         }
-
-        /// <summary>
-        /// Deep clones this item and all children.  Positions and lengths are not cloned.  When inserted in to another item they should be calculated.
-        /// </summary>
-        /// <returns></returns>
+        
         public override QbItemBase Clone()
         {
             QbItemInteger qi = new QbItemInteger(this.Root);
@@ -95,8 +91,6 @@ namespace Nanook.QueenBee.Parser
                 base.ItemCount = (uint)_values.Length;
             }
         }
-
-        public int elements { get; private set; }
 
         internal override void Write(BinaryEndianWriter bw)
         {

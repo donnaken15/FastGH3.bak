@@ -36,8 +36,9 @@
             // 
             // ok
             // 
+            this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ok.Location = new System.Drawing.Point(251, 229);
+            this.ok.Location = new System.Drawing.Point(202, 183);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(29, 23);
             this.ok.TabIndex = 0;
@@ -113,7 +114,7 @@
             "Medium",
             "Hard",
             "Expert"});
-            this.diff.Location = new System.Drawing.Point(84, 55);
+            this.diff.Location = new System.Drawing.Point(84, 53);
             this.diff.Name = "diff";
             this.diff.Size = new System.Drawing.Size(59, 21);
             this.diff.TabIndex = 5;
@@ -124,7 +125,7 @@
             // difflabel
             // 
             this.difflabel.AutoSize = true;
-            this.difflabel.Location = new System.Drawing.Point(1, 58);
+            this.difflabel.Location = new System.Drawing.Point(1, 56);
             this.difflabel.Name = "difflabel";
             this.difflabel.Size = new System.Drawing.Size(84, 13);
             this.difflabel.TabIndex = 6;
@@ -133,7 +134,7 @@
             // importonly
             // 
             this.importonly.AutoSize = true;
-            this.importonly.Location = new System.Drawing.Point(4, 82);
+            this.importonly.Location = new System.Drawing.Point(4, 78);
             this.importonly.Name = "importonly";
             this.importonly.Size = new System.Drawing.Size(103, 17);
             this.importonly.TabIndex = 7;
@@ -145,10 +146,11 @@
             // creditlink
             // 
             this.creditlink.ActiveLinkColor = System.Drawing.Color.Black;
+            this.creditlink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.creditlink.AutoSize = true;
             this.creditlink.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.creditlink.LinkColor = System.Drawing.Color.Black;
-            this.creditlink.Location = new System.Drawing.Point(13, 238);
+            this.creditlink.Location = new System.Drawing.Point(12, 188);
             this.creditlink.Name = "creditlink";
             this.creditlink.Size = new System.Drawing.Size(39, 13);
             this.creditlink.TabIndex = 8;
@@ -161,8 +163,8 @@
             // tooltip
             // 
             this.tooltip.AutomaticDelay = 0;
-            this.tooltip.AutoPopDelay = 60000;
-            this.tooltip.InitialDelay = 100;
+            this.tooltip.AutoPopDelay = 0;
+            this.tooltip.InitialDelay = 10;
             this.tooltip.IsBalloon = true;
             this.tooltip.ReshowDelay = 0;
             this.tooltip.ShowAlways = true;
@@ -174,20 +176,20 @@
             // scrshmode
             // 
             this.scrshmode.AutoSize = true;
-            this.scrshmode.Location = new System.Drawing.Point(4, 106);
+            this.scrshmode.Location = new System.Drawing.Point(4, 102);
             this.scrshmode.Name = "scrshmode";
             this.scrshmode.Size = new System.Drawing.Size(109, 17);
             this.scrshmode.TabIndex = 9;
             this.scrshmode.Text = "Screenshot mode";
             this.tooltip.SetToolTip(this.scrshmode, "Enables screenshot mode. This feature was put into the original \r\nGH3 by default." +
-        " When you pause it, it will not show the pause\r\nmenu, it will completely pause t" +
-        "he game.");
+        " When you pause it, it will not show the pause\r\nmenu. Instead, it will completel" +
+        "y pause the game.");
             this.scrshmode.UseVisualStyleBackColor = true;
             // 
             // nostatsonend
             // 
             this.nostatsonend.AutoSize = true;
-            this.nostatsonend.Location = new System.Drawing.Point(4, 130);
+            this.nostatsonend.Location = new System.Drawing.Point(4, 126);
             this.nostatsonend.Name = "nostatsonend";
             this.nostatsonend.Size = new System.Drawing.Size(101, 17);
             this.nostatsonend.TabIndex = 10;
@@ -199,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 264);
+            this.ClientSize = new System.Drawing.Size(243, 218);
             this.Controls.Add(this.nostatsonend);
             this.Controls.Add(this.scrshmode);
             this.Controls.Add(this.creditlink);
