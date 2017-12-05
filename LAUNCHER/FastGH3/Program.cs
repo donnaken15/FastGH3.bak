@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Nanook.QueenBee.Parser;
+using Nini.Config;
 using static IniFile;
+using System.Threading.Tasks;
 
 namespace FastGH3
 {
@@ -15,7 +18,9 @@ namespace FastGH3
         private static int pushinteger;
         private static string[] parameters;
         private static OpenFileDialog openchart = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = "All chart types|*.mid;*.chart|Song.ini|Song.ini|Any type|*.*", RestoreDirectory = true, Title = "Select chart" };
+        private static IniFile chartini = new IniFile();
 
+        
         static void disallowGameStartup()
         {
             try
@@ -209,7 +214,7 @@ namespace FastGH3
                             {
                                 Console.WriteLine("note @ "+k.GetName()+" that is "+k.GetValue().Substring(5)+" milliseconds long");
                                 notes_expert.Values[pushinteger] = Convert.ToUInt32(k.Name);
-                                notes_expert.Values[pushinteger + 1] = Convert.ToUInt32(k.Value.Substring(5));
+                                notes_expert.Values[pushinteger + 1] = Convert.ToUInt32(k.Value.Substring(5))+1;
                                 notes_expert.Values[pushinteger + 2] = 1;
                                 pushinteger += 3;
                             }
@@ -224,13 +229,12 @@ namespace FastGH3
                     buildsong.ReplaceFile("6BE19E2F", "C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
                     Console.WriteLine("Encoding song.");
                     disallowGameStartup();
-                    disallowGameStartup();
                     Console.WriteLine("Speeding up.");
                     Process dxwnd = new Process();
                     dxwnd.StartInfo.FileName = "C:\\Windows\\FastGH3\\WINDOWED\\dxwnd.exe";
                     dxwnd.StartInfo.WorkingDirectory = "C:\\Windows\\FastGH3\\WINDOWED\\";
                     dxwnd.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                    disallowGameStartup();
+                    dxwnd.Start();
                     Process gh3 = new Process();
                     gh3.StartInfo.FileName = "C:\\Windows\\FastGH3\\gh3.exe";
                     gh3.StartInfo.WorkingDirectory = "C:\\Windows\\FastGH3\\";

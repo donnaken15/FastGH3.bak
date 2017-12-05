@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FastGH3</RootNamespace>
     <AssemblyName>FastGH3</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
@@ -75,6 +75,9 @@
     <Reference Include="Ionic.Zip">
       <HintPath>E:\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="Nini">
+      <HintPath>E:\Nini.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -117,6 +120,7 @@
     <Compile Include="settings.Designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubstringExtensions.cs" />
     <Compile Include="Zlib\Adler32.cs" />
     <Compile Include="Zlib\Deflate.cs" />
     <Compile Include="Zlib\InfBlocks.cs" />
