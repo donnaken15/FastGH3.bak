@@ -6,3 +6,13 @@ C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\bin\Debug\Q
 C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\obj\Debug\FastGH3.exe
 C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\obj\Debug\FastGH3.pdb
 C:\Users\Donna\Documents\Visual Studio 2015\Projects\FastGH3\FastGH3\obj\Debug\FastGH3.csprojResolveAssemblyReference.cache
+C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Debug\FastGH3.exe.config
+C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Debug\FastGH3.exe
+C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Debug\FastGH3.pdb
+C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Debug\Ionic.Zip.dll
+C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Debug\Nini.dll
+C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Debug\FastGH3.csprojResolveAssemblyReference.cache
+C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Debug\FastGH3.settings.resources
+C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Debug\FastGH3.csproj.GenerateResource.Cache
+C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Debug\FastGH3.exe
+C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Debug\FastGH3.pdb

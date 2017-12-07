@@ -4,9 +4,8 @@ using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Nanook.QueenBee.Parser;
-using Nini.Config;
 using static IniFile;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace FastGH3
 {
@@ -14,13 +13,13 @@ namespace FastGH3
     {
         private static string currentchart;
         private static string chart;
+        private static string[] chartiniexpert;
         private static int maxnotes;
         private static int pushinteger;
         private static string[] parameters;
         private static OpenFileDialog openchart = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = "All chart types|*.mid;*.chart|Song.ini|Song.ini|Any type|*.*", RestoreDirectory = true, Title = "Select chart" };
         private static IniFile chartini = new IniFile();
 
-        
         static void disallowGameStartup()
         {
             try
@@ -40,7 +39,7 @@ namespace FastGH3
             }
         }
 
-        [STAThread]
+        [MTAThread]
         static void Main(string[] args)
         {
             Console.Title = "FastGH3";
@@ -163,8 +162,8 @@ namespace FastGH3
                         settings options = new settings();
                         options.ShowDialog();
                     }
-                    if (File.Exists(parameters[1]))
-                    {
+                if (File.Exists(parameters[1]))
+                {
                     Console.WriteLine("FASTGH3 by donnaken15");
                     Console.WriteLine("Checking file extension...");
                     if (Path.GetFileName(parameters[1]).Contains(".chart") && !Path.GetFileName(parameters[1]).Contains(".mid"))
@@ -188,14 +187,15 @@ namespace FastGH3
                     }
                     IniFile chartini = new IniFile();
                     chartini.Load("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart");
-                    Console.WriteLine("Opening song pak.");
-                    File.WriteAllText("C:\\Windows\\FastGH3\\PLUGINS\\CODE\\notelimit\\notelimitfix.cpp", "#include \"noteLimitFix.h\"\n#include \"core\\Patcher.h\"\n#include <stdint.h>\n\nconst uint32_t MAX_NOTES " + chartini.GetSection("ExpertSingle").Keys.Count  + ";//5DA666\nconst uint32_t GH3_MAX_PLAYERS = 2;\nvoid* const SIZEOP_NOTE_ALLOCATION = (void*)0x0041AA78;\nvoid* const ADDROP_SUSTAINARRAY_1 = (void*)0x0041EE33;\nvoid * const ADDROP_SUSTAINARRAY_2 = (void*)0x00423CD4;\nvoid * const ADDROP_SUSTAINARRAY_3 = (void*)0x00423D02;\nvoid * const ADDROP_FCARRAY = (void*)0x00423D14;\nvoid * const ADDROP_NOTEOFFSETARRAY = (void*)0x00423D22;\n\n\nstatic float* fixedSustainArray = nullptr;\nstatic float* fixedFcArray = nullptr;\nstatic uint32_t* fixedOffsetArray = nullptr;\n\n\nstatic GH3P::Patcher g_patcher = GH3P::Patcher(__FILE__);\n\n\nvoid FixNoteLimit()\n{\nif(fixedSustainArray == nullptr)\nfixedSustainArray = new float[MAX_NOTES * GH3_MAX_PLAYERS];\n\n\nif(fixedFcArray == nullptr)\nfixedFcArray = new float[MAX_NOTES * GH3_MAX_PLAYERS];\n\nif(fixedOffsetArray == nullptr)\nfixedOffsetArray = new uint32_t[MAX_NOTES * GH3_MAX_PLAYERS];\n\n\ng_patcher.WriteInt32(SIZEOP_NOTE_ALLOCATION, MAX_NOTES);\n\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_1, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_2, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_3, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_FCARRAY, reinterpret_cast<uint32_t>(fixedFcArray));\ng_patcher.WriteInt32(ADDROP_NOTEOFFSETARRAY, reinterpret_cast<uint32_t>(fixedOffsetArray));\n}\n\n");
+                    chartiniexpert = chart.After("[ExpertSingle]").Split(Environment.NewLine.ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
+                    File.WriteAllText("C:\\Windows\\FastGH3\\PLUGINS\\CODE\\notelimit\\notelimitfix.cpp", "#include \"noteLimitFix.h\"\n#include \"core\\Patcher.h\"\n#include <stdint.h>\n\nconst uint32_t MAX_NOTES " + chartini.GetSection("ExpertSingle").Keys.Count + ";//5DA666\nconst uint32_t GH3_MAX_PLAYERS = 2;\nvoid* const SIZEOP_NOTE_ALLOCATION = (void*)0x0041AA78;\nvoid* const ADDROP_SUSTAINARRAY_1 = (void*)0x0041EE33;\nvoid * const ADDROP_SUSTAINARRAY_2 = (void*)0x00423CD4;\nvoid * const ADDROP_SUSTAINARRAY_3 = (void*)0x00423D02;\nvoid * const ADDROP_FCARRAY = (void*)0x00423D14;\nvoid * const ADDROP_NOTEOFFSETARRAY = (void*)0x00423D22;\n\n\nstatic float* fixedSustainArray = nullptr;\nstatic float* fixedFcArray = nullptr;\nstatic uint32_t* fixedOffsetArray = nullptr;\n\n\nstatic GH3P::Patcher g_patcher = GH3P::Patcher(__FILE__);\n\n\nvoid FixNoteLimit()\n{\nif(fixedSustainArray == nullptr)\nfixedSustainArray = new float[MAX_NOTES * GH3_MAX_PLAYERS];\n\n\nif(fixedFcArray == nullptr)\nfixedFcArray = new float[MAX_NOTES * GH3_MAX_PLAYERS];\n\nif(fixedOffsetArray == nullptr)\nfixedOffsetArray = new uint32_t[MAX_NOTES * GH3_MAX_PLAYERS];\n\n\ng_patcher.WriteInt32(SIZEOP_NOTE_ALLOCATION, MAX_NOTES);\n\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_1, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_2, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_SUSTAINARRAY_3, reinterpret_cast<uint32_t>(fixedSustainArray));\ng_patcher.WriteInt32(ADDROP_FCARRAY, reinterpret_cast<uint32_t>(fixedFcArray));\ng_patcher.WriteInt32(ADDROP_NOTEOFFSETARRAY, reinterpret_cast<uint32_t>(fixedOffsetArray));\n}\n\n");
                     disallowGameStartup();
                     Console.WriteLine("Generating QB template.");
                     File.Delete("C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb");
                     File.Copy("C:\\Windows\\fastgh3\\DATA\\SONGS\\.qb", "C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb", true);
                     File.SetAttributes("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", FileAttributes.Normal);
                     disallowGameStartup();
+                    Console.WriteLine("Opening song pak.");
                     PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\song_song.pak.xen", "", "", PakFormatType.PC);
                     PakEditor buildsong = new PakEditor(pakformat, false);
                     Console.WriteLine("Compiling chart.");
@@ -203,23 +203,33 @@ namespace FastGH3
                     QbItemBase array_easy = new QbItemArray(songdata);
                     array_easy.Create(QbItemType.SectionArray);
                     QbItemInteger notes_expert = new QbItemInteger(songdata);
-                    maxnotes = 5162*3;
+                    maxnotes = chartini.GetSection("ExpertSingle").Keys.Count * 3;
                     File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize", maxnotes.ToString());
                     notes_expert.Create(QbItemType.ArrayInteger);
-                    foreach (IniSection s in chartini.Sections)
+                    pushinteger = 0;
+                    Regex numbers = new Regex(@"^\d$");
+                    foreach (string note in chartiniexpert)
+                    {
+                        uint.TryParse(note.Before(" = N"), out notes_expert.Values[pushinteger]);
+                        uint.TryParse(note.After(" = N ").Substring(2), out notes_expert.Values[pushinteger+1]);
+                        uint.TryParse(note.After(" = N ").Substring(1, 2), out notes_expert.Values[pushinteger + 2]);
+
+                    }
+                    /*foreach (IniSection s in chartini.Sections)
                     {
                         foreach (IniSection.IniKey k in s.Keys)
                         {
                             if (s.Name == "ExpertSingle")
                             {
-                                Console.WriteLine("note @ "+k.GetName()+" that is "+k.GetValue().Substring(5)+" milliseconds long");
+                                //Console.WriteLine("note @ " + k.GetName() + " that is " + k.GetValue().Substring(5) + " milliseconds long");
                                 notes_expert.Values[pushinteger] = Convert.ToUInt32(k.Name);
-                                notes_expert.Values[pushinteger + 1] = Convert.ToUInt32(k.Value.Substring(5))+1;
+                                notes_expert.Values[pushinteger + 1] = Convert.ToUInt32(k.Value.Substring(5)) + 1;
                                 notes_expert.Values[pushinteger + 2] = 1;
                                 pushinteger += 3;
                             }
                         }
-                    }
+                    }*/
+                    //Console.WriteLine(chartini.GetSection("ExpertSingle").Keys.Count+" notes in expert chart.");
                     Console.ReadKey();
                     songdata.AddItem(array_easy);
                     array_easy.AddItem(notes_expert);
