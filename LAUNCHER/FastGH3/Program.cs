@@ -1,21 +1,21 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Nanook.QueenBee.Parser;
 using static IniFile;
-using System.Text.RegularExpressions;
 
 namespace FastGH3
 {
     class Program
     {
+
         private static string currentchart;
         private static string chart;
         private static string[] chartiniexpert;
         private static int maxnotes;
         private static int pushinteger;
+        private static int notecolor;
         private static string[] parameters;
         private static OpenFileDialog openchart = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = "All chart types|*.mid;*.chart|Song.ini|Song.ini|Any type|*.*", RestoreDirectory = true, Title = "Select chart" };
         private static IniFile chartini = new IniFile();
@@ -87,60 +87,66 @@ namespace FastGH3
                     Console.WriteLine("FASTGH3 by donnaken15");
                     Console.WriteLine("Checking file extension...");
 
-                    if (openchart.SafeFileName.Contains(".chart") && !openchart.SafeFileName.Contains(".mid"))
+                    if (!openchart.SafeFileName.Contains(".fsp") || !openchart.SafeFileName.Contains(".zip"))
                     {
-                        Console.WriteLine("Detected chart file.");
-                        currentchart = openchart.FileName;
+                        if (openchart.SafeFileName.Contains(".chart") && !openchart.SafeFileName.Contains(".mid"))
+                        {
+                            Console.WriteLine("Detected chart file.");
+                            currentchart = openchart.FileName;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Detected midi file.");
+                            Process.Start("mid2chart.exe", "-e " + openchart.FileName);
+                            currentchart = openchart.FileName.Replace(openchart.SafeFileName, "") + openchart.SafeFileName.Replace(".chart", " (editable) .chart");
+                        }
+                        chart = File.ReadAllText(currentchart).Replace("}", "").Replace("{", "");
+                        File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart", chart);
+                        IniFile chartini = new IniFile();
+                        chartini.Load("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart");
+                        Console.WriteLine("Generating QB template.");
+                        File.Delete("C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb");
+                        File.Copy("C:\\Windows\\fastgh3\\DATA\\SONGS\\.qb", "C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb", true);
+                        File.SetAttributes("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", FileAttributes.Normal);
+                        Console.WriteLine("Opening song pak.");
+                        disallowGameStartup();
+                        PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\test_song.pak.xen", "", "", PakFormatType.PC);
+                        PakEditor buildsong = new PakEditor(pakformat);
+                        Console.WriteLine("Compiling chart.");
+                        QbFile songdata = new QbFile("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", pakformat);
+                        QbItemBase array_easy = new QbItemArray(songdata);
+                        array_easy.Create(QbItemType.SectionArray);
+                        array_easy.ItemQbKey.Crc.Equals("BDA2A669");
+                        QbItemInteger notes_easy = new QbItemInteger(songdata);
+                        maxnotes = chartini.GetSection("EasySingle").Keys.Count;
+                        File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize", maxnotes.ToString());
+                        notes_easy.Create(QbItemType.ArrayInteger);
+                        notes_easy.Values[0] = 1;
+                        foreach (IniSection.IniKey k in chartini.GetSection("EasySingle").Keys)
+                        {
+                            Console.WriteLine(k.GetValue().Replace("N ", "").EndsWith(" ") + " note @ " + k.GetName() + "");
+                        }
+                        Console.ReadKey();
+                        songdata.AddItem(array_easy);
+                        array_easy.AddItem(notes_easy);
+                        songdata.AlignPointers();
+                        songdata.Write("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
+                        Console.WriteLine("Compiling pak.");
+                        buildsong.ReplaceFile("6BE19E2F", "C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
+                        Console.WriteLine("Encoding song.");
+                        disallowGameStartup();
+                        Console.WriteLine("Speeding up.");
+                        Console.ReadKey();
+                        Process gh3 = new Process();
+                        gh3.StartInfo.FileName = "C:\\Windows\\FastGH3\\gh3.exe";
+                        gh3.StartInfo.WorkingDirectory = "C:\\Windows\\FastGH3\\";
+                        /*gh3.Start();
+                        //*/
                     }
                     else
                     {
-                        Console.WriteLine("Detected midi file.");
-                        Process.Start("mid2chart.exe", "-e " + openchart.FileName);
-                        currentchart = openchart.FileName.Replace(openchart.SafeFileName, "") + openchart.SafeFileName.Replace(".chart", " (editable) .chart");
+                        MessageBox.Show("TEST");
                     }
-                    chart = File.ReadAllText(currentchart).Replace("}", "").Replace("{", "");
-                    File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart", chart);
-                    IniFile chartini = new IniFile();
-                    chartini.Load("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.chart");
-                    Console.WriteLine("Generating QB template.");
-                    File.Delete("C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb");
-                    File.Copy("C:\\Windows\\fastgh3\\DATA\\SONGS\\.qb", "C:\\Windows\\fastgh3\\DATA\\SONGS\\song.qb", true);
-                    File.SetAttributes("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", FileAttributes.Normal);
-                    Console.WriteLine("Opening song pak.");
-                    disallowGameStartup();
-                    PakFormat pakformat = new PakFormat("C:\\Windows\\FastGH3\\DATA\\SONGS\\test_song.pak.xen", "", "", PakFormatType.PC);
-                    PakEditor buildsong = new PakEditor(pakformat);
-                    Console.WriteLine("Compiling chart.");
-                    QbFile songdata = new QbFile("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb", pakformat);
-                    QbItemBase array_easy = new QbItemArray(songdata);
-                    array_easy.Create(QbItemType.SectionArray);
-                    array_easy.ItemQbKey.Crc.Equals("BDA2A669");
-                    QbItemInteger notes_easy = new QbItemInteger(songdata);
-                    maxnotes = chartini.GetSection("EasySingle").Keys.Count;
-                    File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize",maxnotes.ToString());
-                    notes_easy.Create(QbItemType.ArrayInteger);
-                    notes_easy.Values[0] = 1;
-                    foreach (IniSection.IniKey k in chartini.GetSection("EasySingle").Keys)
-                    {
-                        Console.WriteLine(k.GetValue().Replace("N ","").EndsWith(" ") +" note @ " + k.GetName()+"");
-                    }
-                    Console.ReadKey();
-                    songdata.AddItem(array_easy);
-                    array_easy.AddItem(notes_easy);
-                    songdata.AlignPointers();
-                    songdata.Write("C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
-                    Console.WriteLine("Compiling pak.");
-                    buildsong.ReplaceFile("6BE19E2F", "C:\\Windows\\FastGH3\\DATA\\SONGS\\song.qb");
-                    Console.WriteLine("Encoding song.");
-                    disallowGameStartup();
-                    Console.WriteLine("Speeding up.");
-                    Console.ReadKey();
-                    Process gh3 = new Process();
-                    gh3.StartInfo.FileName = "C:\\Windows\\FastGH3\\gh3.exe";
-                    gh3.StartInfo.WorkingDirectory = "C:\\Windows\\FastGH3\\";
-                    /*gh3.Start();
-                    //*/
-
                 }
             }
             //try
@@ -203,17 +209,87 @@ namespace FastGH3
                     QbItemBase array_easy = new QbItemArray(songdata);
                     array_easy.Create(QbItemType.SectionArray);
                     QbItemInteger notes_expert = new QbItemInteger(songdata);
-                    maxnotes = chartini.GetSection("ExpertSingle").Keys.Count * 3;
-                    File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize", maxnotes.ToString());
+                    File.WriteAllText("C:\\Windows\\FastGH3\\DATA\\SONGS\\maxarraysize", (3*chartiniexpert.Length).ToString());
                     notes_expert.Create(QbItemType.ArrayInteger);
                     pushinteger = 0;
-                    Regex numbers = new Regex(@"^\d$");
                     foreach (string note in chartiniexpert)
                     {
                         uint.TryParse(note.Before(" = N"), out notes_expert.Values[pushinteger]);
-                        uint.TryParse(note.After(" = N ").Substring(2), out notes_expert.Values[pushinteger+1]);
-                        uint.TryParse(note.After(" = N ").Substring(1, 2), out notes_expert.Values[pushinteger + 2]);
+                        notes_expert.Values[pushinteger] *= Convert.ToUInt32(2.8125);
+                        int.TryParse(note.After(" = N ").Before(" "), out notecolor);
+                        uint.TryParse(note.After(" = N ") + notecolor + " ", out notes_expert.Values[pushinteger+1]);
+                        if (notes_expert.Values[pushinteger+1] == 0)
+                        {
+                            notes_expert.Values[pushinteger + 1] = 1;
+                        }
+                        if (notecolor == 0)
+                        {
+                            try
+                            {
+                                if (notes_expert.Values[pushinteger - 1] == 2 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 3;
+                                }
+                                if (notes_expert.Values[pushinteger - 1] == 4 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 5;
+                                }
+                                if (notes_expert.Values[pushinteger - 1] == 8 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 9;
+                                }
+                                if (notes_expert.Values[pushinteger - 1] == 16 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 17;
+                                }
+                                if (notes_expert.Values[pushinteger - 3] != notes_expert.Values[pushinteger] && notes_expert.Values[pushinteger + 3] != notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 1;
+                                }
+                                if (notes_expert.Values[pushinteger + 5] == 2 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 3;
+                                }
+                                if (notes_expert.Values[pushinteger + 5] == 4 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 5;
+                                }
+                                if (notes_expert.Values[pushinteger + 5] == 8 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 9;
+                                }
+                                if (notes_expert.Values[pushinteger + 5] == 16 && notes_expert.Values[pushinteger - 3] == notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 17;
+                                }
+                                if (notes_expert.Values[pushinteger + 4] != notes_expert.Values[pushinteger] && notes_expert.Values[pushinteger + 3] != notes_expert.Values[pushinteger])
+                                {
+                                    notes_expert.Values[pushinteger + 2] = 1;
+                                }
+                            }
+                            catch
+                            {
 
+                            }
+                        }
+                        if (notecolor == 1)
+                        {
+                            notes_expert.Values[pushinteger + 2] = 2;
+                        }
+                        if (notecolor == 2)
+                        {
+                            notes_expert.Values[pushinteger + 2] = 4;
+                        }
+                        if (notecolor == 3)
+                        {
+                            notes_expert.Values[pushinteger + 2] = 8;
+                        }
+                        if (notecolor == 4)
+                        {
+                            notes_expert.Values[pushinteger + 2] = 16;
+                        }
+                        Console.WriteLine(notes_expert.Values[pushinteger]+Environment.NewLine+notes_expert.Values[pushinteger+1]+Environment.NewLine+notes_expert.Values[pushinteger+2]);
+                        pushinteger += 3;
                     }
                     /*foreach (IniSection s in chartini.Sections)
                     {

@@ -12,8 +12,8 @@ C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Release\FastGH3.exe.config
 C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Release\FastGH3.exe
 C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Release\FastGH3.pdb
 C:\Windows\fastgh3\LAUNCHER\FastGH3\bin\Release\Ionic.Zip.dll
+C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Release\FastGH3.csprojResolveAssemblyReference.cache
 C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Release\FastGH3.settings.resources
 C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Release\FastGH3.csproj.GenerateResource.Cache
 C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Release\FastGH3.exe
 C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Release\FastGH3.pdb
-C:\Windows\fastgh3\LAUNCHER\FastGH3\obj\Release\FastGH3.csprojResolveAssemblyReference.cache
