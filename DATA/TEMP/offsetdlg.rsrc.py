@@ -1,0 +1,66 @@
+{'type':'CustomDialog',
+    'name':'Template',
+    'title':'Dialog Template',
+    'position':(276, 225),
+    'size':(247, 164),
+    'components': [
+
+{'type':'StaticText', 
+    'name':'instructions_labelCopy', 
+    'position':(20, 25), 
+    'text':'or enter the time of the first note.', 
+    },
+
+{'type':'StaticText', 
+    'name':'instructions_label', 
+    'position':(20, 10), 
+    'text':'Either input the amount to offset the notes,', 
+    },
+
+{'type':'StaticText', 
+    'name':'firstnote_label', 
+    'position':(15, 75), 
+    'text':'First Note (ms) :', 
+    },
+
+{'type':'StaticText', 
+    'name':'offset_label', 
+    'position':(15, 50), 
+    'text':'Note Offset (ms) :', 
+    },
+
+{'type':'Spinner', 
+    'name':'firstnote_spinner', 
+    'position':(110, 70), 
+    'size':(86, -1), 
+    'max':100000, 
+    'min':0, 
+    'value':0, 
+    },
+
+{'type':'Spinner', 
+    'name':'offset_spinner', 
+    'position':(110, 45), 
+    'size':(86, -1), 
+    'max':100000, 
+    'min':-100000, 
+    'value':0, 
+    },
+
+{'type':'Button', 
+    'id':5100, 
+    'name':'btnOK', 
+    'position':(10, 100), 
+    'default':1, 
+    'label':'OK', 
+    },
+
+{'type':'Button', 
+    'id':5101, 
+    'name':'btnCancel', 
+    'position':(120, 100), 
+    'label':'Cancel', 
+    },
+
+] # end components
+} # end CustomDialog

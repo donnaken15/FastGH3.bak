@@ -32,23 +32,26 @@ namespace FastGH3
         
         void changeRes(string width, string height)
         {
-            try
+            if (disableEvents == false)
             {
-                var olddxwnd = Process.GetProcessesByName("dxwnd")[0];
-                olddxwnd.Kill();
-            }
-            catch
-            {
+                try
+                {
+                    var olddxwnd = Process.GetProcessesByName("dxwnd")[0];
+                    olddxwnd.Kill();
+                }
+                catch
+                {
 
+                }
+                dxwndini.SetKeyValue("target", "sizx0", width);
+                dxwndini.SetKeyValue("target", "sizy0", height);
+                File.WriteAllText(Path.Combine(Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName, "Local\\Aspyr\\FastGH3\\AspyrConfig.xml"), "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<r>\n    <s id = \"Video.Width\">" + width + "</s>\n    <s id = \"Video.Height\">" + height + "</s>\n    <s id = \"Options.GraphicsQuality\">0</s>\n    <s id = \"Options.Crowd\">0</s>\n    <s id = \"Options.Physics\">0</s>\n    <s id = \"Options.Flares\">0</s>\n    <s id = \"Options.FrontRowCamera\">1</s>\n    <s id = \"AudioLagReminderShown\">1</s>\n    <s id = \"AutoLogin\">OFF</s>\n    <s id = \"Username\"></s>\n    <s id = \"MatchUsername\"></s>\n    <s id = \"Password\"></s>\n    <s id = \"6f1d2b61d5a011cfbfc7444553540000\">201 202 203 204 205 402 999 219 235 400 401 999 310</s>\n    <s id = \"Sound.SongSkew\">0</s>\n</r>");
+                Process newdxwnd = new Process();
+                newdxwnd.StartInfo.FileName = "C:\\Windows\\FastGH3\\WINDOWED\\dxwnd.exe";
+                newdxwnd.StartInfo.WorkingDirectory = "C:\\Windows\\FastGH3\\WINDOWED\\";
+                newdxwnd.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                newdxwnd.Start();
             }
-            dxwndini.SetKeyValue("target","sizx0",width);
-            dxwndini.SetKeyValue("target", "sizy0", height);
-            File.WriteAllText(Path.Combine(Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName,"Local\\Aspyr\\FastGH3\\AspyrConfig.xml"), "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<r>\n    <s id = \"Video.Width\">"+width+"</s>\n    <s id = \"Video.Height\">"+height+"</s>\n    <s id = \"Options.GraphicsQuality\">0</s>\n    <s id = \"Options.Crowd\">0</s>\n    <s id = \"Options.Physics\">0</s>\n    <s id = \"Options.Flares\">0</s>\n    <s id = \"Options.FrontRowCamera\">1</s>\n    <s id = \"AudioLagReminderShown\">1</s>\n    <s id = \"AutoLogin\">OFF</s>\n    <s id = \"Username\"></s>\n    <s id = \"MatchUsername\"></s>\n    <s id = \"Password\"></s>\n    <s id = \"6f1d2b61d5a011cfbfc7444553540000\">201 202 203 204 205 402 999 219 235 400 401 999 310</s>\n    <s id = \"Sound.SongSkew\">0</s>\n</r>");
-            Process newdxwnd = new Process();
-            newdxwnd.StartInfo.FileName = "C:\\Windows\\FastGH3\\WINDOWED\\dxwnd.exe";
-            newdxwnd.StartInfo.WorkingDirectory = "C:\\Windows\\FastGH3\\WINDOWED\\";
-            newdxwnd.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-            newdxwnd.Start();
         }
 
         public settings()
@@ -1586,7 +1589,7 @@ Stackoverflow users,");
 
         private void Colorpanel_MouseDoubleClick()
         {
-            previewbgcolor previewcolor = new previewbgcolor();
+            Form previewcolor = new Form() { Text = "FASTGH3 COLOR PREVIEW™" };
             previewcolor.ShowDialog();
         }
     }
