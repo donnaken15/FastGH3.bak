@@ -16,7 +16,7 @@ body {
 a.ext:link {color: #444; font-weight: normal; text-indent:7px;}
 a.ext:visited {color: #444; font-weight:normal; }
 a.ext:link:hover, a.ext:visited:hover { color:#663300; font-weight:normal; }
-img { border:0; vertical-align: middle; }
+img { border:0; }
 dt { font-weight:bold; }
 p, ul, ol { margin-top:0; margin-bottom:1em; }
 ul ul, ol ol { margin-bottom:0; }
@@ -37,7 +37,7 @@ h4 { font-size:1em; }
 	width:100%;
 }
 #sitenav li {
-	background:#ddf;
+	background:#f3f3f3;
 	border:1px solid black;
 	display:inline;
 	height:100%;
@@ -47,7 +47,7 @@ h4 { font-size:1em; }
 }
 #sitenav li.selected {
 	background:white;
-	border-top:3px solid blue;
+	border-top:3px solid gray;
 	border-bottom:1px solid white;
 }
 #sitenav :link, #sitenav :visited { text-decoration:none; }
@@ -56,7 +56,7 @@ h4 { font-size:1em; }
 #subnav {
 	background:#ddd;
 	border:2px solid #666;
-	width:160px; /* AdSense ads are 160px wide, plus we now put a 2px border around them, so this should match. */
+	width:160px;
 }
 #subnav h3 {
 	font-size:1em;
@@ -99,9 +99,25 @@ h4 { font-size:1em; }
 	padding:0 1em;
 }
 
+@font-face {
+    font-family: "idautosymtxt";
+    src:url("IDAutomation Symbol Text.ttf");
+}
 
+font {
+vertical-align:top;
+}
 </style>
-<h1><a href="http://donnaken15.github.io/FastGH3"><img title="FastGH3" alt="FastGH3" src="note.bmp"></a></h1>
+<a href="http://donnaken15.github.io/FastGH3"><img title="FastGH3" alt="FastGH3" src="note.bmp"></a>
+<font face="idautosymtxt" style="color:#0f7;font-size:96;font-weight:normal;vertical-align:center;">F</font>
+<font face="idautosymtxt" style="color:#f00;font-size:96;font-weight:normal;vertical-align:center;">a</font>
+<font face="idautosymtxt" style="color:#f00;font-size:96;font-weight:normal;vertical-align:center;">s</font>
+<font face="idautosymtxt" style="color:#ff0;font-size:96;font-weight:normal;vertical-align:center;">t</font>
+<font face="idautosymtxt" style="color:#00f;font-size:96;font-weight:normal;vertical-align:center;">G</font>
+<font face="idautosymtxt" style="color:#00f;font-size:96;font-weight:normal;vertical-align:center;">H</font>
+<font face="idautosymtxt" style="color:#f80;font-size:96;font-weight:normal;vertical-align:center;">3</font>
+
+<p/><p/>
 <div id="sitenav">
   <ul>
     <li class="selected">Home</li><li><a href="./dl">Downloads</a></li><li><a href="./docs">Documentation</a></li><li><a href="./links">Links</a></li><li><a href="./credits">Credits</a></li>
