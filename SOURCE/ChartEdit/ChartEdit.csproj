@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{E19926EE-C1F4-4741-BF0F-0334A27DBD5D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChartEdit</RootNamespace>
+    <AssemblyName>chart2gh3</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>ChartEdit.Program</StartupObject>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>3</LangVersion>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="beatType.cs" />
+    <Compile Include="Chart.cs" />
+    <Compile Include="Code\Chart\ChartWriter.cs" />
+    <Compile Include="EventsSection.cs" />
+    <Compile Include="EventsSectionEntry.cs" />
+    <Compile Include="EventType.cs" />
+    <Compile Include="GameProps.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="IChartWriter.cs" />
+    <Compile Include="Ini.cs" />
+    <Compile Include="KeyValue.cs" />
+    <Compile Include="Note.cs" />
+    <Compile Include="NoteProp.cs" />
+    <Compile Include="NoteTrack.cs" />
+    <Compile Include="NoteTracks.cs" />
+    <Compile Include="NoteType.cs" />
+    <Compile Include="OffsetTransformer.cs" />
+    <Compile Include="Optimizer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="QbArrayWriter.cs" />
+    <Compile Include="QbcNote.cs" />
+    <Compile Include="QbcNoteTrack.cs" />
+    <Compile Include="Serializable.cs" />
+    <Compile Include="SongSection.cs" />
+    <Compile Include="SongSectionEntry.cs" />
+    <Compile Include="SpecialProp.cs" />
+    <Compile Include="SyncTrackEntry.cs" />
+    <Compile Include="SyncTrackSection.cs" />
+    <Compile Include="SyncType.cs" />
+    <Compile Include="TrackProps.cs" />
+    <Compile Include="TrackPropsList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

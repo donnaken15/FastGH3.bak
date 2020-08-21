@@ -1,17 +1,5 @@
-DATA/PAK/axel_12.pak.xen
-DATA/SONGS/test_song.pak.xen
-PLUGINS/CODE/core/Debug/core.tlog/*
-PLUGINS/CODE/noteLimit/Debug/noteLimitfix.tlog/*
-*.lastbuildstate
+* (*).*
+* - Copy.*
 *.bak
-* - Copy-
+.vs
 log
-*/gh3.idb
-gh3.idb
-DATA/PAK/qb.pak1.xen
-DATA/PAK/qb.pab1.xen
-DATA/PAK/qb.pab2.xen
-DATA/ZONES/global.pab1.xen
-DATA/ZONES/global.pak1.xen
-DATA/PAK/qb.pak.xen_b96f5656e40c4cc4a0d132fea6f34a4e
-gh3.idb

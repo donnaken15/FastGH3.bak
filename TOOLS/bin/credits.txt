@@ -1,0 +1,8 @@
+adituv - QbScript reverse engineering + compiler/decompiler + flame fix + built in QB decompiler
+ExileLord - GH3+ and executable reverse engineering + mods + GHTCP patching + IDA stuff + ChartEdit/Chart-to-PAK conversion tools + progress in IDA beyond Oct 2016 that he accidentally shared in his videos and streams that might've benefitted in finding more things had he done this
+donnaken15 - other QbScript hacking + mod setup + game optimization + main program and automation
+maxkiller - original GHTCP
+Nanook - QueenBee + Parser
+GameZelda - original modding and game data R.E.
+No1mann, Invo, Leff, ScoreHero forums, and many others - Miscellaneous help
+Pricks and overlords of the brand new and now toxic and unfunny GH community + Srylain

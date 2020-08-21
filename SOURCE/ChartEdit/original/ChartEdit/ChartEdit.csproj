@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{AADD2C85-D5F4-4EF4-A4F9-EA7915BE8604}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChartEdit</RootNamespace>
+    <AssemblyName>ChartEdit</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>ChartEdit.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionType.cs" />
+    <Compile Include="beatType.cs" />
+    <Compile Include="Chart.cs" />
+    <Compile Include="ChartBB.cs" />
+    <Compile Include="ChartColor.cs" />
+    <Compile Include="ChartPoint.cs" />
+    <Compile Include="Code\Chart\ChartWriter.cs" />
+    <Compile Include="EventsSection.cs" />
+    <Compile Include="EventsSectionEntry.cs" />
+    <Compile Include="EventType.cs" />
+    <Compile Include="GameProps.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Gma\UserActivityMonitor\GlobalEventProvider.cs" />
+    <Compile Include="Gma\UserActivityMonitor\HookManager.cs" />
+    <Compile Include="Gma\UserActivityMonitor\MouseEventExtArgs.cs" />
+    <Compile Include="IChartWriter.cs" />
+    <Compile Include="InputManager.cs" />
+    <Compile Include="InstrumentTreeNode.cs" />
+    <Compile Include="KeyManager.cs" />
+    <Compile Include="KeyType.cs" />
+    <Compile Include="KeyValue.cs" />
+    <Compile Include="KMKey.cs" />
+    <Compile Include="MTool.cs" />
+    <Compile Include="Note.cs" />
+    <Compile Include="NoteProp.cs" />
+    <Compile Include="NoteTrack.cs" />
+    <Compile Include="NoteTracks.cs" />
+    <Compile Include="NoteType.cs" />
+    <Compile Include="ObjectType.cs" />
+    <Compile Include="OffsetTransformer.cs" />
+    <Compile Include="Optimizer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="QbArrayWriter.cs" />
+    <Compile Include="QbcNote.cs" />
+    <Compile Include="QbcNoteTrack.cs" />
+    <Compile Include="RenderControl.cs" />
+    <Compile Include="RendererBeatLine.cs" />
+    <Compile Include="RendererSpecial.cs" />
+    <Compile Include="RenderingMode.cs" />
+    <Compile Include="RootTreeNode.cs" />
+    <Compile Include="SectionTreeNode.cs" />
+    <Compile Include="SEMode.cs" />
+    <Compile Include="Serializable.cs" />
+    <Compile Include="SongSection.cs" />
+    <Compile Include="SongSectionEntry.cs" />
+    <Compile Include="SpecialProp.cs" />
+    <Compile Include="SyncTrackEntry.cs" />
+    <Compile Include="SyncTrackSection.cs" />
+    <Compile Include="SyncType.cs" />
+    <Compile Include="ToolType.cs" />
+    <Compile Include="TrackProps.cs" />
+    <Compile Include="TrackPropsList.cs" />
+    <Compile Include="TrackTreeNode.cs" />
+    <Compile Include="TSManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EditForm.resx" />
+    <EmbeddedResource Include="MainForm.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

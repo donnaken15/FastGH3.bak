@@ -1,0 +1,136 @@
+Media { Images {
+  "0"
+  {
+   index 0
+   image icon_document
+  }
+  "1"
+  {
+   index 1
+   image icon_soft
+  }
+  "3"
+  {
+   index 3
+   image icon_weblink
+  }
+  "4"
+  {
+   index 4
+   image icon_create
+  }
+  "5"
+  {
+   index 5
+   image icon_refresh
+  }
+  "6"
+  {
+   index 6
+   image icon_reset
+  }
+  "7"
+  {
+   index 7
+   image icon_folder
+  }
+  "8"
+  {
+   index 8
+   image icon_files
+  }
+  "9"
+  {
+   index 9
+   image icon_gnote
+  }
+  "10"
+  {
+   index 10
+   image icon_leff
+  }
+  "11"
+  {
+   index 11
+   image icon_sp2pu
+  }
+  "12"
+  {
+   index 12
+   image icon_qb
+  }
+  "13"
+  {
+   index 13
+   image icon_ida
+  }
+  "14"
+  {
+   index 14
+   image icon_skull
+  }
+ }
+
+ Sections
+ {
+  "1"
+  {
+   id	1
+   Name "Charting"
+
+   fb
+   {
+    Title	"Feedback"
+    ShellExecute	"Feedback\\FeedbackOGL.exe"
+    Image	14
+   }
+   c2m
+   {
+    Title	"Chart2Mid"
+    ShellExecute	"Chart2Mid.jar"
+    Image	10
+   }
+   s2p
+   {
+    Title	"sp2pu"
+    Program	"sp2pu.exe"
+    Image	11
+   }
+  }
+  "2"
+  {
+   id	2
+   Name "Modding"
+
+   qb
+   {
+    Title	"QueenBee"
+    Program	"queenbee.exe"
+    Image	12
+   }
+   idb
+   {
+    Title	"IDA Database"
+    ShellExecute	"..\\dbg\\game.idb"
+    Image	13
+   }
+   cp
+   {
+    Title	"Control Panel Plus"
+    Program	"ghtcp.exe"
+    Image	4
+   }
+  }
+  "3"
+  {
+   id	3
+   Name "Miscellaneous"
+
+   credits
+   {
+    Title	"Credits"
+    ShellExecute	"credits.txt"
+    Image	1
+   }
+  }
+}}

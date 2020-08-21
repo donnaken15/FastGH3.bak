@@ -4,7 +4,7 @@
     <CheatEntry>
       <ID>4</ID>
       <Description>"Score"</Description>
-      <LastState Value="46950" RealAddress="00A12B00"/>
+      <LastState Value="0" RealAddress="00A12B00"/>
       <VariableType>2 Bytes</VariableType>
       <Address>gh3.exe+612B00</Address>
     </CheatEntry>
@@ -18,7 +18,7 @@
     <CheatEntry>
       <ID>6</ID>
       <Description>"Health"</Description>
-      <LastState Value="0.3777940273" RealAddress="00A12AF0"/>
+      <LastState Value="0.5" RealAddress="00A12AF0"/>
       <VariableType>Float</VariableType>
       <Address>gh3.exe+612AF0</Address>
     </CheatEntry>
@@ -59,7 +59,7 @@
     </CheatEntry>
     <CheatEntry>
       <ID>2</ID>
-      <Description>"+pts per beat"</Description>
+      <Description>"+pts per long"</Description>
       <LastState Value="25" RealAddress="00A12B70"/>
       <VariableType>Float</VariableType>
       <Address>gh3.exe+612B70</Address>
